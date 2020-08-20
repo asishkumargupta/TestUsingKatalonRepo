@@ -11,7 +11,7 @@ import com.kms.katalon.core.testobject.TestObject
 
 import ioStructures.BookedTktPnrDtls
 
-import com.kms.katalon.core.model.FailureHandling
+import enquiryIoStructures.OutputFareEnq_B3
 
 
 def static "reusableComponents.CustomKeywords.openHtmlPage"(
@@ -362,7 +362,7 @@ def static "reusableComponents.CustomKeywordsForEnquiry.fillDtlsOfFareEnq"(
 
 def static "reusableComponents.CustomKeywordsForEnquiry.writeFareEnqOutputFile"(
     	String outputFile	
-     , 	java.util.List<enquiryIoStructures.OutputFareEnq_B3> outputFareEnq_B3List	) {
+     , 	java.util.List<OutputFareEnq_B3> outputFareEnq_B3List	) {
     (new reusableComponents.CustomKeywordsForEnquiry()).writeFareEnqOutputFile(
         	outputFile
          , 	outputFareEnq_B3List)
@@ -480,20 +480,10 @@ def static "reusableComponents.CustomKeywordsForEnquiry.fillDtlsOfFareEnqWithClu
          , 	returnClass)
 }
 
-def static "com.katalon.plugin.keyword.calendar.SetDateCalendarKeyword.setDate"(
-    	TestObject to	
-     , 	int day	
-     , 	int month	
-     , 	int year	
-     , 	int slideTimeOut	
-     , 	FailureHandling flowControl	) {
-    (new com.katalon.plugin.keyword.calendar.SetDateCalendarKeyword()).setDate(
-        	to
-         , 	day
-         , 	month
-         , 	year
-         , 	slideTimeOut
-         , 	flowControl)
+def static "reusableComponents.CustomKeywordsForEnquiry.getFareDtlsClickNext"(
+    	OutputFareEnq_B3 outputFareEnq_B3	) {
+    (new reusableComponents.CustomKeywordsForEnquiry()).getFareDtlsClickNext(
+        	outputFareEnq_B3)
 }
 
 def static "reusableComponents.CustomKeywordsForBooking.capchaInputDialog"() {

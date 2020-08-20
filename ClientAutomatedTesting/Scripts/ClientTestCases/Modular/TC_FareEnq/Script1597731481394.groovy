@@ -44,13 +44,15 @@ import enquiryIoStructures.OutputFareEnq_B3 as OutputFareEnq_B3
   char recordSeparator = ',';
   String jrnyDate,currentDate =null;
   String fileName= "EnquirySanityChecks";
-   
+  String timenow = null;
 
  jrnyDate = CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.getJourneyDate'();
  currentDate= CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.getCurrentDate'();
   String outputFile = (fileName + '_' + currentDate) + '.csv'
 
   System.out.println("currentDate") ;
+  String partialImageStartName = '',
+  exceptionImageNameOnly = '';
 
 
  inputFareEnq_B3List = CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.readInputFareEnqDtls'(".\\UserDataFiles\\inputfiles\\EnquiryDataFiles\\Verify_Fare_ENQ.csv")
@@ -70,6 +72,7 @@ import enquiryIoStructures.OutputFareEnq_B3 as OutputFareEnq_B3
 		 inputFareEnq_B3 = new InputFareEnq_B3() ;
 		 recordString = '' ;
 		 testCaseId   = inputFareEnq_B3List.get(recordCount).getTestCaseId()
+		 recNo        = inputFareEnq_B3List.get(recordCount).getRecNo()
 		 trainNo      = inputFareEnq_B3List.get(recordCount).getTrainNo()
 		 journeyDate  = jrnyDate;
 		 srcCode      = inputFareEnq_B3List.get(recordCount).getSrcCode()
@@ -89,18 +92,24 @@ import enquiryIoStructures.OutputFareEnq_B3 as OutputFareEnq_B3
 		 siteCode       = inputFareEnq_B3List.get(recordCount).getSiteCode()
 
 		 OutputFareEnq_B3 outputFareEnq_B3 = new OutputFareEnq_B3();
+		 partialImageStartName = ".\\UserDataFiles\\outfiles\\" + testCaseId + "exceptionImage" + timenow + ".png" ;
+		 exceptionImageNameOnly = testCaseId + "exceptionImage" + timenow + ".png"
 		 
 		 String functionalityName ="Fare Enquiry";
 		 outputFareEnq_B3.setTestCaseId(testCaseId);
+		 outputFareEnq_B3.setRecNo(recNo);
 		 outputFareEnq_B3.setFunctionalityName(functionalityName);
 		 outputFareEnq_B3.setSiteName(siteName);
 		 outputFareEnq_B3.setSiteCode(siteCode);
+		
 
 		 // dataToTest = testCaseId  + recordSeparator + trainNo + recordSeparator + srcStnCode + recordSeparator + destnStnCode + recordSeparator + clsCode
 		 CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.fillDtlsOfFareEnqWithClusterStn'(trainNo,journeyDate,
 																		   srcCode,destnStnCode,quotaCode,clsCode,
 																		   catering,adultNo,childNo,clusterClass,enroutePoint,
 																		   viaPoint,concession,applicableClass,returnClass)
+		 
+		 
 		
 		 
 		 if(WebUI.waitForElementPresent(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_Base Fare'),
@@ -126,15 +135,20 @@ import enquiryIoStructures.OutputFareEnq_B3 as OutputFareEnq_B3
 			  
 			
 		  }
-		  outputFareEnq_B3List.add(outputFareEnq_B3)
+		  
+		  outputFareEnq_B3 = CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.getFareDtlsClickNext'(outputFareEnq_B3)
+		//  outputFareEnq_B3List.add(outputFareEnq_B3)
 		 
+		  outputFareEnq_B3List.add(outputFareEnq_B3)
 
 		
 	} catch (Exception e) {
 		e.printStackTrace()
 	}
 }
-CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.writeFareEnqOutputFile'(outputFile,outputFareEnq_B3List)
+  
+  CustomKeywords.'reusableComponents.CustomKeywords.takeCompleteScreenShot'(partialImageStartName)
+  CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.writeFareEnqOutputFile'(outputFile,outputFareEnq_B3List)
 
 
 

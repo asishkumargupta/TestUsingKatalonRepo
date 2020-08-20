@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>span_AWDCOM - PARAMVR_MAHAVR_COMP</name>
+   <name>div_fareDetails</name>
    <tag></tag>
-   <elementGuidId>5287171d-896a-48bf-9573-c1170df299f8</elementGuidId>
+   <elementGuidId>0af018aa-7f44-4a75-9ae2-8b926a252899</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//mat-option[@id='mat-option-419']/span</value>
+         <value>//div[@id='divMain']/app-enquiries/mat-sidenav-container/mat-sidenav-content/app-fare-enquiry/div/div[3]/div/div</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -17,69 +17,55 @@
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
-      <value>span</value>
+      <value>div</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>mat-option-text</value>
+      <value>card-body text-dark px-2 py-1</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value> AWDCOM - PARAMVR_MAHAVR_COMP </value>
+      <value>Train Type : SUPJourney Distance : 2074 KM</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;mat-option-419&quot;)/span[@class=&quot;mat-option-text&quot;]</value>
+      <value>id(&quot;divMain&quot;)/app-enquiries[@class=&quot;ng-star-inserted&quot;]/mat-sidenav-container[@class=&quot;mat-drawer-container mat-sidenav-container bg-transparent ng-star-inserted mat-drawer-transition&quot;]/mat-sidenav-content[@class=&quot;mat-drawer-content mat-sidenav-content ng-untouched ng-pristine ng-valid&quot;]/app-fare-enquiry[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;container&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;card bg-theme mat-elevation-z4 my-3&quot;]/div[@class=&quot;card-body text-dark px-2 py-1&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:idRelative</name>
       <type>Main</type>
-      <value>//mat-option[@id='mat-option-419']/span</value>
+      <value>//div[@id='divMain']/app-enquiries/mat-sidenav-container/mat-sidenav-content/app-fare-enquiry/div/div[3]/div/div</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Northern Railways'])[1]/following::span[5]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Reset'])[1]/following::div[7]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='AWDPMV - PARAMVIR_MAHAVIR'])[1]/preceding::span[1]</value>
-   </webElementXpaths>
-   <webElementXpaths>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath:neighbor</name>
-      <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='COMP65 - PRIV_PAS_I_&amp;_1ACOMP'])[1]/preceding::span[2]</value>
-   </webElementXpaths>
-   <webElementXpaths>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath:neighbor</name>
-      <type>Main</type>
-      <value>//*/text()[normalize-space(.)='AWDCOM - PARAMVR_MAHAVR_COMP']/parent::*</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Return Class'])[2]/following::div[13]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//mat-option/span</value>
+      <value>//div[3]/div/div</value>
    </webElementXpaths>
 </WebElementEntity>

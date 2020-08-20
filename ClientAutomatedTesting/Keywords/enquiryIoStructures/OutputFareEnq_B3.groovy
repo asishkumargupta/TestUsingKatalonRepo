@@ -33,7 +33,7 @@ public class OutputFareEnq_B3 {
 		recNo = '';
 		concession= '';
 		voucherAmount= '';
-	     cashAmount= '';
+		cashAmount= '';
 	}
 
 	public String getRecNo() {
@@ -86,7 +86,7 @@ public class OutputFareEnq_B3 {
 	public void setSingleAdultFareDtls(SingleAdultFareDtls singleAdultFareDtls) {
 		this.singleAdultFareDtls = singleAdultFareDtls;
 	}
-	
+
 	public TxnFareDtls gettxnFareDtls() {
 		return txnFareDtls;
 	}
@@ -120,8 +120,8 @@ public class OutputFareEnq_B3 {
 	private String siteCode;
 	private String siteName;
 	private String recNo;
-	
-	
+
+
 	private SingleAdultFareDtls singleAdultFareDtls;
 	private TxnFareDtls txnFareDtls;
 

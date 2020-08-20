@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>span_firstConcessionSelected</name>
+   <name>div_ cashAmount</name>
    <tag></tag>
-   <elementGuidId>1c4e6897-ca81-4b45-99b7-cc1212438b09</elementGuidId>
+   <elementGuidId>dd9c3a74-45de-4351-86a4-22a003da944b</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//mat-option/span</value>
+         <value>//div[@id='divMain']/app-enquiries/mat-sidenav-container/mat-sidenav-content/app-fare-enquiry/div/div[3]/app-fare-enquiry-output/div/div[3]/div/div/div/div/div[6]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -17,69 +17,62 @@
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
-      <value>span</value>
+      <value>div</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>mat-option-text</value>
+      <value>col-2</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value> PMGAWD - POLIC_MEDEL_GALLNTRY </value>
+      <value>: ₹1,310.00</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;mat-option-1097&quot;)/span[@class=&quot;mat-option-text&quot;]</value>
+      <value>id(&quot;divMain&quot;)/app-enquiries[@class=&quot;ng-star-inserted&quot;]/mat-sidenav-container[@class=&quot;mat-drawer-container mat-sidenav-container bg-transparent ng-star-inserted mat-drawer-transition&quot;]/mat-sidenav-content[@class=&quot;mat-drawer-content mat-sidenav-content ng-untouched ng-pristine ng-valid&quot;]/app-fare-enquiry[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;container&quot;]/div[@class=&quot;ng-star-inserted&quot;]/app-fare-enquiry-output[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;card bg-theme mat-elevation-z4 my-3&quot;]/div[@class=&quot;card-body text-dark p-1 text-sm ng-star-inserted&quot;]/div[@class=&quot;col-lg-12 col-12 p-0 my-1&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body text-dark px-2 py-1&quot;]/div[@class=&quot;row bg-light my-1 py-1 mx-0&quot;]/div[@class=&quot;col-2&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:idRelative</name>
       <type>Main</type>
-      <value>//mat-option[@id='mat-option-1097']/span</value>
+      <value>//div[@id='divMain']/app-enquiries/mat-sidenav-container/mat-sidenav-content/app-fare-enquiry/div/div[3]/app-fare-enquiry-output/div/div[3]/div/div/div/div/div[6]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Northern Railways'])[1]/following::span[5]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='CASH AMOUNT'])[1]/following::div[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='PMGCOM - POLICE_MEDL_GAL_COMP'])[1]/preceding::span[1]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='₹0.00'])[13]/following::div[2]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='POLICE - POLICE_PASS'])[1]/preceding::span[2]</value>
-   </webElementXpaths>
-   <webElementXpaths>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath:neighbor</name>
-      <type>Main</type>
-      <value>//*/text()[normalize-space(.)='PMGAWD - POLIC_MEDEL_GALLNTRY']/parent::*</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='ATTENTION'])[1]/preceding::div[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//mat-option/span</value>
+      <value>//div[3]/div/div/div/div/div[6]</value>
    </webElementXpaths>
 </WebElementEntity>

@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//mat-option[@id='mat-option-4']/span</value>
+         <value>//mat-option/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

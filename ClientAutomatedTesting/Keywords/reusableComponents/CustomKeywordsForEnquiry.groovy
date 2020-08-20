@@ -5,6 +5,7 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import org.apache.commons.lang3.StringUtils
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
@@ -25,6 +26,7 @@ import enquiryIoStructures.InputFareEnq_B3 as InputFareEnq_B3
 import enquiryIoStructures.InputRmtWiseChartStatus_D3
 import enquiryIoStructures.InputTrainBtwStations_B1 as InputTrainBtwStations_B1
 import enquiryIoStructures.OutputTrainBtwStations_B1 as OutputTrainBtwStations_B1
+import enquiryIoStructures.SingleAdultFareDtls
 import enquiryIoStructures.OutputFareEnq_B3 as OutputFareEnq_B3
 import enquiryIoStructures.OutputRmtWiseChartStatus_D3 as OutputRmtWiseChartStatus_D3
 import enquiryIoStructures.OutputCurrentStatusOfPsgn_A1 as OutputCurrentStatusOfPsgn_A1
@@ -334,22 +336,23 @@ public class CustomKeywordsForEnquiry {
 				System.out.println("Line Read=" + line) ;
 				String[] attributes = line.split(",");
 				inputFareEnq_B3.setTestCaseId(attributes[0].trim())
-				inputFareEnq_B3.setTrainNo(attributes[1].trim())
-				inputFareEnq_B3.setSiteName(attributes[2].trim())
-				inputFareEnq_B3.setSiteCode(attributes[3].trim())
-				inputFareEnq_B3.setSrcCode(attributes[4].trim())
-				inputFareEnq_B3.setDestnStnCode(attributes[5].trim())
-				inputFareEnq_B3.setClassCode(attributes[6].trim())
-				inputFareEnq_B3.setQuotaCode(attributes[7].trim())
-				inputFareEnq_B3.setClusterClass(attributes[8].trim())
-				inputFareEnq_B3.setCatering(attributes[9].trim())
-				inputFareEnq_B3.setAdultNo(attributes[10].trim())
-				inputFareEnq_B3.setChildNo(attributes[11].trim())
-				inputFareEnq_B3.setEnroutePoint(attributes[12].trim())
-				inputFareEnq_B3.setViaPoint(attributes[13].trim())
-				inputFareEnq_B3.setConcession(attributes[14].trim())
-				inputFareEnq_B3.setApplicableClass(attributes[15].trim())
-				inputFareEnq_B3.setReturnClass(attributes[16].trim())
+				inputFareEnq_B3.setRecNo(attributes[1].trim())
+				inputFareEnq_B3.setTrainNo(attributes[2].trim())
+				inputFareEnq_B3.setSiteName(attributes[3].trim())
+				inputFareEnq_B3.setSiteCode(attributes[4].trim())
+				inputFareEnq_B3.setSrcCode(attributes[5].trim())
+				inputFareEnq_B3.setDestnStnCode(attributes[6].trim())
+				inputFareEnq_B3.setClassCode(attributes[7].trim())
+				inputFareEnq_B3.setQuotaCode(attributes[8].trim())
+				inputFareEnq_B3.setClusterClass(attributes[9].trim())
+				inputFareEnq_B3.setCatering(attributes[10].trim())
+				inputFareEnq_B3.setAdultNo(attributes[11].trim())
+				inputFareEnq_B3.setChildNo(attributes[12].trim())
+				inputFareEnq_B3.setEnroutePoint(attributes[13].trim())
+				inputFareEnq_B3.setViaPoint(attributes[14].trim())
+				inputFareEnq_B3.setConcession(attributes[15].trim())
+				inputFareEnq_B3.setApplicableClass(attributes[16].trim())
+				inputFareEnq_B3.setReturnClass(attributes[17].trim())
 
 				inputFareEnq_B3List.add(inputFareEnq_B3);
 			}
@@ -547,11 +550,16 @@ public class CustomKeywordsForEnquiry {
 			pw = new PrintWriter(bw);
 
 			pw.write("TESTCASE ID " +
+					recordSeparator + " REC NO "+
 					recordSeparator + " FUNCTIONALITY NAME "+
 					recordSeparator + " SITE NAME "	+
 					recordSeparator + " SITE CODE "	+
 					recordSeparator + " STATUS "	+
-					recordSeparator + " ERROR MESSAGE ")
+					recordSeparator + " CONCESSION "	+
+					recordSeparator + " VOUCHER AMOUNT "+
+					recordSeparator + " CASH AMOUNT"+
+					recordSeparator + " ERROR MESSAGE")
+
 
 			pw.write("\n");
 
@@ -560,10 +568,14 @@ public class CustomKeywordsForEnquiry {
 
 				System.out.println("status") ;
 				pw.println(outputFareEnq_B3List.get(i).getTestCaseId() + recordSeparator
+						+ outputFareEnq_B3List.get(i).getRecNo() + recordSeparator
 						+ outputFareEnq_B3List.get(i).getFunctionalityName() + recordSeparator
 						+ outputFareEnq_B3List.get(i).getSiteName() + recordSeparator
 						+ outputFareEnq_B3List.get(i).getSiteCode() + recordSeparator
 						+ outputFareEnq_B3List.get(i).getStatus()+ recordSeparator
+						+ outputFareEnq_B3List.get(i).getConcession()+ recordSeparator
+						+ outputFareEnq_B3List.get(i).getVoucherAmount()+ recordSeparator
+						+ outputFareEnq_B3List.get(i).getCashAmount()+ recordSeparator
 						+ outputFareEnq_B3List.get(i).getErrorMsg() + recordSeparator);
 
 
@@ -1309,48 +1321,48 @@ public class CustomKeywordsForEnquiry {
 		WebUI.click(findTestObject('NxtGenPRS_OR/Enquiry/FareEnq_B3/input_childNo'))
 		WebUI.clearText(findTestObject('NxtGenPRS_OR/Enquiry/FareEnq_B3/input_childNo'))
 		WebUI.setText(findTestObject('NxtGenPRS_OR/Enquiry/FareEnq_B3/input_childNo'), childNo)
-		
-		CustomKeywords.sendTabKeysUsingRobot();
-		
-		
-		if(WebUI.waitForElementPresent(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/input_Concession'),
-			GlobalVariable.waitForOutput)){
-		WebUI.click(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/input_Concession'))
-		System.out.println('concession  =   '+ concession)
-		WebUI.setText(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/input_Concession'), concession)
-		System.out.println('click conceesion')
-		//WebUI.click(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/span_PTORAJ - PTO_FOR_RAJDHANI'))
 
-	}
-			
-//	if(WebUI.waitForElementPresent(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_Applicable Class'),
-//				GlobalVariable.waitForOutput)){
-//			
-//		WebUI.click(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_Applicable Class'))
-//
-//
-//		for (int classCount = GlobalVariable.classCountStart; classCount <= GlobalVariable.maxApplicableClass; classCount++) {
-//
-//			testObject = 'Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/ApplcbleClass'+ classCount
-//
-//			if (WebUI.verifyElementPresent(findTestObject(testObject), GlobalVariable.waitForElementPresentSec, FailureHandling.OPTIONAL) == true) {
-//				//if (WebUI.verifyElementPresent(findTestObject(testObject), 1, FailureHandling.CONTINUE_ON_FAILURE) == true) {
-//
-//				ApplicableClassName = WebUI.getText(findTestObject(testObject))
-//				//	System.out.println('CLASS NAME IS=' + className)
-//				guiApplicableClassCode = ApplicableClassName.split('-')[0].trim()
-//				System.out.println(' GUI CLass CLASS CODE IS=' + guiClassCode)
-//				System.out.println('INPUT CLASS CODE IS=' + applicableClass)
-//				if (guiApplicableClassCode.equals(applicableClass)) {
-//					System.out.println('CLICKING CLASS CODE')
-//					WebUI.click(findTestObject(testObject))
-//					CustomKeywords.sendEscapeKeysUsingRobot();
-//					break;
-//				}
-//
-//			}
-//		}
-//	}
+		CustomKeywords.sendTabKeysUsingRobot();
+
+
+		if(WebUI.waitForElementPresent(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/input_Concession'),
+		GlobalVariable.waitForOutput)){
+			WebUI.click(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/input_Concession'))
+			System.out.println('concession  =   '+ concession)
+			WebUI.setText(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/input_Concession'), concession)
+			System.out.println('click conceesion')
+			WebUI.click(findTestObject('NxtGenPRS_OR/Enquiry/FareEnq_B3/span_firstConcessionNameSelected'))
+
+		}
+
+		//	if(WebUI.waitForElementPresent(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_Applicable Class'),
+		//				GlobalVariable.waitForOutput)){
+		//
+		//		WebUI.click(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_Applicable Class'))
+		//
+		//
+		//		for (int classCount = GlobalVariable.classCountStart; classCount <= GlobalVariable.maxApplicableClass; classCount++) {
+		//
+		//			testObject = 'Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/ApplcbleClass'+ classCount
+		//
+		//			if (WebUI.verifyElementPresent(findTestObject(testObject), GlobalVariable.waitForElementPresentSec, FailureHandling.OPTIONAL) == true) {
+		//				//if (WebUI.verifyElementPresent(findTestObject(testObject), 1, FailureHandling.CONTINUE_ON_FAILURE) == true) {
+		//
+		//				ApplicableClassName = WebUI.getText(findTestObject(testObject))
+		//				//	System.out.println('CLASS NAME IS=' + className)
+		//				guiApplicableClassCode = ApplicableClassName.split('-')[0].trim()
+		//				System.out.println(' GUI CLass CLASS CODE IS=' + guiClassCode)
+		//				System.out.println('INPUT CLASS CODE IS=' + applicableClass)
+		//				if (guiApplicableClassCode.equals(applicableClass)) {
+		//					System.out.println('CLICKING CLASS CODE')
+		//					WebUI.click(findTestObject(testObject))
+		//					CustomKeywords.sendEscapeKeysUsingRobot();
+		//					break;
+		//				}
+		//
+		//			}
+		//		}
+		//	}
 
 		WebUI.click(findTestObject('NxtGenPRS_OR/Enquiry/FareEnq_B3/button_Get Fare'))
 		WebUI.delay(GlobalVariable.sleepTimeInSec);
@@ -1358,9 +1370,40 @@ public class CustomKeywordsForEnquiry {
 
 	}
 
+	@Keyword
+
+
+	public static OutputFareEnq_B3 getFareDtlsClickNext(OutputFareEnq_B3 outputFareEnq_B3) {
+		String voucherAmount = '' ,
+		cashAmount='',
+		concession='';
+
+		
+		String scrollingPosition = 'Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_ voucherAmount'
+
+		WebUI.scrollToElement(findTestObject(scrollingPosition), 3)
+
+
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_fareDetails'), 1, FailureHandling.OPTIONAL) == true) {
+
+			voucherAmount = WebUI.getText(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_ voucherAmount'))
+			
+			voucherAmount= StringUtils.normalizeSpace( voucherAmount );
+				
+			cashAmount = WebUI.getText(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_ cashAmount'))
+			cashAmount= StringUtils.normalizeSpace( cashAmount );
+			concession = WebUI.getText(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/span_concession'))
+			concession = concession.split(" ")[0];
+			System.out.println("voucherAmount=" + voucherAmount) ;
+			System.out.println("cashAmount=" + cashAmount) ;
+			System.out.println("concession=" + concession) ;
+			outputFareEnq_B3.setVoucherAmount(voucherAmount)
+			outputFareEnq_B3.setCashAmount(cashAmount)
+			outputFareEnq_B3.setConcession(concession)
+
+		}
+		return outputFareEnq_B3;
+	}
 
 }
-
-
-
 
