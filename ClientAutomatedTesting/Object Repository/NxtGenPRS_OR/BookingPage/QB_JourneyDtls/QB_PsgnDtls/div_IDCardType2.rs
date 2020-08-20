@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>div_IDCard ype2</name>
+   <name>div_IDCardType2</name>
    <tag></tag>
    <elementGuidId>91eda424-84ed-45a9-b6a4-1e8a00bc292d</elementGuidId>
    <selectorCollection>
