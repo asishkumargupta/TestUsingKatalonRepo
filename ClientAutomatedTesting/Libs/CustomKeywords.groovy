@@ -486,6 +486,18 @@ def static "reusableComponents.CustomKeywordsForEnquiry.getFareDtlsClickNext"(
         	outputFareEnq_B3)
 }
 
+def static "reusableComponents.CustomKeywordsForEnquiry.writeLogFileAndSkiperRec"(
+    	String outFileWithoutExtn	
+     , 	java.util.List<enquiryIoStructures.InputFareEnq_B3> inputFareEnq_B3List	
+     , 	java.util.List<OutputFareEnq_B3> outputFareEnq_B3List	
+     , 	long startTime	) {
+    (new reusableComponents.CustomKeywordsForEnquiry()).writeLogFileAndSkiperRec(
+        	outFileWithoutExtn
+         , 	inputFareEnq_B3List
+         , 	outputFareEnq_B3List
+         , 	startTime)
+}
+
 def static "reusableComponents.CustomKeywordsForBooking.capchaInputDialog"() {
     (new reusableComponents.CustomKeywordsForBooking()).capchaInputDialog()
 }

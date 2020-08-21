@@ -45,7 +45,7 @@ public class InputFareEnq_B3 {
 		siteCode = '';
 		recNo='';
 	}
-	
+
 	public String getClusterClass() {
 		return clusterClass;
 	}

@@ -21,6 +21,7 @@ WebUI.openBrowser('')
 WebUI.navigateToUrl(GlobalVariable.url)
 
 WebUI.maximizeWindow()
+
 WebUI.click(findTestObject('NxtGenPRS_OR/HomePage/bookingTab'))
 //WebUI.setText(findTestObject('null'),GlobalVariable.officePcIp)
 WebUI.setText(findTestObject('Object Repository/NxtGenPRS_OR/BookingPage/LogInDtls/LogInDtls/input_Login_mat-input-0'), GlobalVariable.clientUserid)

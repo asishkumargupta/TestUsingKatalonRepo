@@ -12,6 +12,7 @@ import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
@@ -38,15 +39,20 @@ import enquiryIoStructures.OutputFareEnq_B3 as OutputFareEnq_B3
  InputFareEnq_B3 inputFareEnq_B3 ;
 
   
-
+  long startTime = System.currentTimeMillis();
   List<InputFareEnq_B3> inputFareEnq_B3List = new ArrayList<InputFareEnq_B3>();
   List<OutputFareEnq_B3> outputFareEnq_B3List = new ArrayList<OutputFareEnq_B3>();
   char recordSeparator = ',';
   String jrnyDate,currentDate =null;
-  String fileName= "EnquirySanityChecks";
+  String fileName= "NextGen_FARE_ENQ";
   String timenow = null;
+  String testCaseName= "TC_CL_FARE_ENQ";
+ 
+  
+  timenow = CustomKeywords.'reusableComponents.CustomKeywords.getDateTime'();
+  String FileNameWithoutExtn = testCaseName  + '_' + timenow;
 
- jrnyDate = CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.getJourneyDate'();
+ //jrnyDate = CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.getJourneyDate'();
  currentDate= CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.getCurrentDate'();
   String outputFile = (fileName + '_' + currentDate) + '.csv'
 
@@ -71,25 +77,25 @@ import enquiryIoStructures.OutputFareEnq_B3 as OutputFareEnq_B3
 	try {
 		 inputFareEnq_B3 = new InputFareEnq_B3() ;
 		 recordString = '' ;
-		 testCaseId   = inputFareEnq_B3List.get(recordCount).getTestCaseId()
-		 recNo        = inputFareEnq_B3List.get(recordCount).getRecNo()
-		 trainNo      = inputFareEnq_B3List.get(recordCount).getTrainNo()
-		 journeyDate  = jrnyDate;
-		 srcCode      = inputFareEnq_B3List.get(recordCount).getSrcCode()
-		 destnStnCode = inputFareEnq_B3List.get(recordCount).getDestnStnCode()
-		 quotaCode    = inputFareEnq_B3List.get(recordCount).getQuotaCode()
-		 clsCode      = inputFareEnq_B3List.get(recordCount).getClassCode()
-		 clusterClass = inputFareEnq_B3List.get(recordCount).getClusterClass()
-		 catering     = inputFareEnq_B3List.get(recordCount).getCatering()
-		 adultNo      = inputFareEnq_B3List.get(recordCount).getAdultNo()
-		 childNo      = inputFareEnq_B3List.get(recordCount).getChildNo()
-		 enroutePoint =inputFareEnq_B3List.get(recordCount).getEnroutePoint();
-		 viaPoint      =inputFareEnq_B3List.get(recordCount).getViaPoint();
-		 concession      =inputFareEnq_B3List.get(recordCount).getConcession();
-		 applicableClass=inputFareEnq_B3List.get(recordCount).getApplicableClass();
-		 returnClass    =inputFareEnq_B3List.get(recordCount).getReturnClass();
-		 siteName       = inputFareEnq_B3List.get(recordCount).getSiteName()
-		 siteCode       = inputFareEnq_B3List.get(recordCount).getSiteCode()
+		 testCaseId      = inputFareEnq_B3List.get(recordCount).getTestCaseId()
+		 recNo           = inputFareEnq_B3List.get(recordCount).getRecNo()
+		 trainNo         = inputFareEnq_B3List.get(recordCount).getTrainNo()
+		 journeyDate     = inputFareEnq_B3List.get(recordCount).getJourneyDate()
+		 srcCode         = inputFareEnq_B3List.get(recordCount).getSrcCode()
+		 destnStnCode    = inputFareEnq_B3List.get(recordCount).getDestnStnCode()
+		 quotaCode       = inputFareEnq_B3List.get(recordCount).getQuotaCode()
+		 clsCode         = inputFareEnq_B3List.get(recordCount).getClassCode()
+		 clusterClass    = inputFareEnq_B3List.get(recordCount).getClusterClass()
+		 catering        = inputFareEnq_B3List.get(recordCount).getCatering()
+		 adultNo         = inputFareEnq_B3List.get(recordCount).getAdultNo()
+		 childNo         = inputFareEnq_B3List.get(recordCount).getChildNo()
+		 enroutePoint    = inputFareEnq_B3List.get(recordCount).getEnroutePoint();
+		 viaPoint        = inputFareEnq_B3List.get(recordCount).getViaPoint();
+		 concession      = inputFareEnq_B3List.get(recordCount).getConcession();
+		 applicableClass = inputFareEnq_B3List.get(recordCount).getApplicableClass();
+		 returnClass     = inputFareEnq_B3List.get(recordCount).getReturnClass();
+		 siteName        = inputFareEnq_B3List.get(recordCount).getSiteName()
+		 siteCode        = inputFareEnq_B3List.get(recordCount).getSiteCode()
 
 		 OutputFareEnq_B3 outputFareEnq_B3 = new OutputFareEnq_B3();
 		 partialImageStartName = ".\\UserDataFiles\\outfiles\\" + testCaseId + "exceptionImage" + timenow + ".png" ;
@@ -114,9 +120,13 @@ import enquiryIoStructures.OutputFareEnq_B3 as OutputFareEnq_B3
 		 
 		 if(WebUI.waitForElementPresent(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_Base Fare'),
 			 GlobalVariable.waitForOutput)){
+		 
 			 status='passed';
 			 outputFareEnq_B3.setStatus(status);
 			 outputFareEnq_B3.setErrorMsg();
+			 
+			 outputFareEnq_B3 = CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.getFareDtlsClickNext'(outputFareEnq_B3)
+			 
 		  } else {
 		  
 			errorMsg=WebUI.getText(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_error Error'));
@@ -136,18 +146,21 @@ import enquiryIoStructures.OutputFareEnq_B3 as OutputFareEnq_B3
 			
 		  }
 		  
-		  outputFareEnq_B3 = CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.getFareDtlsClickNext'(outputFareEnq_B3)
-		//  outputFareEnq_B3List.add(outputFareEnq_B3)
+		 
+		
 		 
 		  outputFareEnq_B3List.add(outputFareEnq_B3)
 
 		
 	} catch (Exception e) {
+	
+	CustomKeywords.'reusableComponents.CustomKeywords.takeCompleteScreenShot'(partialImageStartName)
+	
 		e.printStackTrace()
 	}
 }
   
-  CustomKeywords.'reusableComponents.CustomKeywords.takeCompleteScreenShot'(partialImageStartName)
+  CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.writeLogFileAndSkiperRec'(FileNameWithoutExtn,inputFareEnq_B3List,outputFareEnq_B3List,startTime)
   CustomKeywords.'reusableComponents.CustomKeywordsForEnquiry.writeFareEnqOutputFile'(outputFile,outputFareEnq_B3List)
 
 

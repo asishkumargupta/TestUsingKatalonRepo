@@ -6,6 +6,10 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import org.apache.commons.lang3.StringUtils
+import org.apache.commons.io.FileUtils
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
@@ -338,21 +342,22 @@ public class CustomKeywordsForEnquiry {
 				inputFareEnq_B3.setTestCaseId(attributes[0].trim())
 				inputFareEnq_B3.setRecNo(attributes[1].trim())
 				inputFareEnq_B3.setTrainNo(attributes[2].trim())
-				inputFareEnq_B3.setSiteName(attributes[3].trim())
-				inputFareEnq_B3.setSiteCode(attributes[4].trim())
-				inputFareEnq_B3.setSrcCode(attributes[5].trim())
-				inputFareEnq_B3.setDestnStnCode(attributes[6].trim())
-				inputFareEnq_B3.setClassCode(attributes[7].trim())
-				inputFareEnq_B3.setQuotaCode(attributes[8].trim())
-				inputFareEnq_B3.setClusterClass(attributes[9].trim())
-				inputFareEnq_B3.setCatering(attributes[10].trim())
-				inputFareEnq_B3.setAdultNo(attributes[11].trim())
-				inputFareEnq_B3.setChildNo(attributes[12].trim())
-				inputFareEnq_B3.setEnroutePoint(attributes[13].trim())
-				inputFareEnq_B3.setViaPoint(attributes[14].trim())
-				inputFareEnq_B3.setConcession(attributes[15].trim())
-				inputFareEnq_B3.setApplicableClass(attributes[16].trim())
-				inputFareEnq_B3.setReturnClass(attributes[17].trim())
+				inputFareEnq_B3.setJourneyDate(attributes[3].trim())
+				inputFareEnq_B3.setSiteName(attributes[4].trim())
+				inputFareEnq_B3.setSiteCode(attributes[5].trim())
+				inputFareEnq_B3.setSrcCode(attributes[6].trim())
+				inputFareEnq_B3.setDestnStnCode(attributes[7].trim())
+				inputFareEnq_B3.setClassCode(attributes[8].trim())
+				inputFareEnq_B3.setQuotaCode(attributes[9].trim())
+				inputFareEnq_B3.setClusterClass(attributes[10].trim())
+				inputFareEnq_B3.setCatering(attributes[11].trim())
+				inputFareEnq_B3.setAdultNo(attributes[12].trim())
+				inputFareEnq_B3.setChildNo(attributes[13].trim())
+				inputFareEnq_B3.setEnroutePoint(attributes[14].trim())
+				inputFareEnq_B3.setViaPoint(attributes[15].trim())
+				inputFareEnq_B3.setConcession(attributes[16].trim())
+				inputFareEnq_B3.setApplicableClass(attributes[17].trim())
+				inputFareEnq_B3.setReturnClass(attributes[18].trim())
 
 				inputFareEnq_B3List.add(inputFareEnq_B3);
 			}
@@ -544,7 +549,7 @@ public class CustomKeywordsForEnquiry {
 
 		try{
 
-			File file = new File(".\\UserDataFiles\\outfiles\\Enquiry\\"+outputFile)
+			File file = new File(".\\UserDataFiles\\outfiles\\"+outputFile)
 			fw = new FileWriter(file, true);
 			bw = new BufferedWriter(fw);
 			pw = new PrintWriter(bw);
@@ -1378,7 +1383,7 @@ public class CustomKeywordsForEnquiry {
 		cashAmount='',
 		concession='';
 
-		
+
 		String scrollingPosition = 'Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_ voucherAmount'
 
 		WebUI.scrollToElement(findTestObject(scrollingPosition), 3)
@@ -1387,9 +1392,9 @@ public class CustomKeywordsForEnquiry {
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_fareDetails'), 1, FailureHandling.OPTIONAL) == true) {
 
 			voucherAmount = WebUI.getText(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_ voucherAmount'))
-			
+
 			voucherAmount= StringUtils.normalizeSpace( voucherAmount );
-				
+
 			cashAmount = WebUI.getText(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/div_ cashAmount'))
 			cashAmount= StringUtils.normalizeSpace( cashAmount );
 			concession = WebUI.getText(findTestObject('Object Repository/NxtGenPRS_OR/Enquiry/FareEnq_B3/span_concession'))
@@ -1405,5 +1410,133 @@ public class CustomKeywordsForEnquiry {
 		return outputFareEnq_B3;
 	}
 
+
+	@Keyword
+
+	public static void writeLogFileAndSkiperRec (String outFileWithoutExtn,List<InputFareEnq_B3> inputFareEnq_B3List,List<OutputFareEnq_B3> outputFareEnq_B3List,long startTime) {
+		//	String timenow = null;
+		String psgnStatusString = null;
+		char psgnRecordSeparator ='#';
+		char psgnStatusSeparator = '%';
+		char recordSeparator = ',';
+		String recordString = '';
+		String psgnDtlsString = '';
+		//	timenow = getDateTime();
+		//String outFile = outFileWithoutExtn + ".csv" ;
+		String logFilename = ".\\UserDataFiles\\outfiles\\" + outFileWithoutExtn + ".log" ;
+		String matchingRecordsFilename = ".\\UserDataFiles\\outfiles\\" + outFileWithoutExtn + "MATCHRECS" + ".csv" ;
+		String skipRecordsFilename = ".\\UserDataFiles\\outfiles\\" + outFileWithoutExtn + "SKIPRECS" + ".csv" ;
+
+		File skipRecordsFile = new File(skipRecordsFilename);
+		FileWriter fr_skipRecsFile = null;
+		BufferedWriter br_skipRecsFile = null;
+
+
+		File matchRecsFile = new File(matchingRecordsFilename);
+		FileWriter fr_matchRecsFile = null;
+		BufferedWriter br_matchRecsFile = null;
+
+		File logFile = new File(logFilename);
+		FileWriter fr_logfile = null;
+		BufferedWriter br_logFile = null;
+		int 	recordCountSkippedDueToException=0,
+		recordCountMatchingFare = 0,
+		recordCountNotMatchingFare = 0;
+
+
+		//File file = new File(".\\UserDataFiles\\outfiles\\" + outFile)
+
+		FileWriter fr = null;
+		BufferedWriter br = null;
+		try{
+
+
+
+			fr_logfile = new FileWriter(logFile);
+			br_logFile = new BufferedWriter(fr_logfile);
+
+			fr_skipRecsFile = new FileWriter(skipRecordsFile);
+			br_skipRecsFile = new BufferedWriter(fr_skipRecsFile);
+
+
+			br_skipRecsFile.write("TESTCASE ID " +
+					recordSeparator + " REC NO "+
+					recordSeparator + " FUNCTIONALITY NAME "+
+					recordSeparator + " SITE NAME "	+
+					recordSeparator + " SITE CODE "	+
+					recordSeparator + " STATUS "	+
+					recordSeparator + " CONCESSION "	+
+					recordSeparator + " VOUCHER AMOUNT "+
+					recordSeparator + " CASH AMOUNT"+
+					recordSeparator + " ERROR MESSAGE")
+
+			br_skipRecsFile.newLine();
+
+			for ( int recordCount = 0; recordCount < inputFareEnq_B3List.size(); recordCount++) {
+				recordString = '' ;
+				psgnDtlsString = '';
+
+				//For writing skipped rec details - start
+				if (outputFareEnq_B3List.get(recordCount).getStatus().equals("FAILED")) {
+
+					recordString = inputFareEnq_B3List.get(recordCount).getTestCaseId() +
+							recordSeparator + inputFareEnq_B3List.get(recordCount).getRecNo() +
+							recordSeparator + inputFareEnq_B3List.get(recordCount).getTrainNo() +
+							recordSeparator + inputFareEnq_B3List.get(recordCount).getJourneyDate() +
+
+							recordSeparator + inputFareEnq_B3List.get(recordCount).getSrcCode() +
+							recordSeparator + inputFareEnq_B3List.get(recordCount).getDestnStnCode() +
+							recordSeparator + inputFareEnq_B3List.get(recordCount).getClassCode() +
+							recordSeparator + inputFareEnq_B3List.get(recordCount).getQuotaCode() +
+							recordSeparator + inputFareEnq_B3List.get(recordCount).getSiteCode() +
+							recordSeparator + inputFareEnq_B3List.get(recordCount).getSiteName() +
+							recordSeparator + outputFareEnq_B3List.get(recordCount).getConcession() +
+							recordSeparator + outputFareEnq_B3List.get(recordCount).getVoucherAmount() +
+							recordSeparator + outputFareEnq_B3List.get(recordCount).getCashAmount() +
+
+
+
+							br_skipRecsFile.write(recordString)
+					br_skipRecsFile.newLine();
+
+					recordCountSkippedDueToException ++;
+					continue;
+				}
+
+			}
+			long endTime = System.currentTimeMillis();
+			long executionTimeInMilliSec = endTime - startTime;
+			String hms = CustomKeywords.millsToDateFormat(executionTimeInMilliSec)
+
+			br_logFile.write("Total Records Processed =" +  inputFareEnq_B3List.size());
+			br_logFile.newLine();
+			br_logFile.write("Total Records Skipped Due to Exception=" +  recordCountSkippedDueToException);
+			br_logFile.newLine();
+			br_logFile.write("Skipped Record Details - " + skipRecordsFile.getName() )
+			br_logFile.newLine();
+			//		br_logFile.write("Execution Time in MilliSec - " +  executionTimeInMilliSec )
+			//		br_logFile.newLine();
+			br_logFile.write("Execution Time in DD - hh:mm:sec - " +  hms )
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				br_logFile.close();
+				fr_logfile.close();
+				br_skipRecsFile.close();
+				fr_skipRecsFile.close();
+
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 }
+
 
